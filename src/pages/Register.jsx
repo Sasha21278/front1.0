@@ -4,11 +4,7 @@ import { register } from "../services/api";
 import { setUserToLocalStorage } from "../services/auth";
 
 const Register = () => {
-    const [form, setForm] = useState({
-        username: "",
-        email: "",
-        password: "",
-    });
+    const [form, setForm] = useState({ username: "", email: "", password: "" });
     const [error, setError] = useState("");
     const navigate = useNavigate();
 
@@ -27,19 +23,19 @@ const Register = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-100 p-4">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100 px-4">
             <form
                 onSubmit={handleSubmit}
-                className="bg-white p-8 rounded shadow-md w-full max-w-sm"
+                className="bg-white p-8 rounded-xl shadow-lg w-full max-w-md"
             >
-                <h2 className="text-2xl font-semibold mb-4">Регистрация</h2>
-                {error && <p className="text-red-500 mb-2">{error}</p>}
+                <h2 className="text-2xl font-bold mb-6 text-gray-800">📝 Регистрация</h2>
+                {error && <p className="text-red-500 mb-4">{error}</p>}
                 <input
                     name="username"
                     placeholder="Логин"
                     value={form.username}
                     onChange={handleChange}
-                    className="w-full mb-3 p-2 border rounded"
+                    className="w-full mb-3 p-2 border rounded text-sm"
                 />
                 <input
                     name="email"
@@ -47,7 +43,7 @@ const Register = () => {
                     placeholder="Email"
                     value={form.email}
                     onChange={handleChange}
-                    className="w-full mb-3 p-2 border rounded"
+                    className="w-full mb-3 p-2 border rounded text-sm"
                 />
                 <input
                     type="password"
@@ -55,11 +51,11 @@ const Register = () => {
                     placeholder="Пароль"
                     value={form.password}
                     onChange={handleChange}
-                    className="w-full mb-3 p-2 border rounded"
+                    className="w-full mb-4 p-2 border rounded text-sm"
                 />
                 <button
                     type="submit"
-                    className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                    className="w-full bg-green-600 text-white py-2 rounded font-medium hover:bg-green-700"
                 >
                     Зарегистрироваться
                 </button>

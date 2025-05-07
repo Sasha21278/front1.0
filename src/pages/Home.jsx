@@ -22,14 +22,7 @@ const Home = () => {
     const fetchDocuments = async () => {
         try {
             const res = await getDocuments();
-            const docs = Array.isArray(res.data)
-                ? res.data
-                : res.data.documents || [];
-            console.log("user.id:", user?.id);
-            console.log("documents:", docs.map(d => ({ id: d.id, userId: d.user?.id })));
-
-            // фильтруем только документы текущего пользователя
-            // const userDocs = docs.filter(doc => doc.user?.id === user.id);
+            const docs = Array.isArray(res.data) ? res.data : res.data.documents || [];
             const userDocs = docs.filter(doc => String(doc.user?.id) === String(user.id));
             setAllDocuments(userDocs);
         } catch (err) {
@@ -39,8 +32,6 @@ const Home = () => {
             setLoading(false);
         }
     };
-    console.log("👤 Пользователь:", user);
-    console.log("📄 Документы:", allDocuments);
 
     const handleLogout = async () => {
         try {
@@ -52,31 +43,30 @@ const Home = () => {
     };
 
     return (
-        <div className="flex min-h-screen bg-gray-100">
-            <aside className="w-64 bg-white border-r p-4 shadow-sm">
-                <h2 className="text-lg font-semibold mb-4">OSU BPdisk</h2>
-                <nav className="flex flex-col gap-2">
-                    <button className="text-left p-2 rounded hover:bg-blue-100">Мои документы</button>
-                    <button className="text-left p-2 rounded hover:bg-blue-100">Одобренные</button>
-                    <button className="text-left p-2 rounded hover:bg-blue-100">Архив</button>
-                    <button
-                        onClick={handleLogout}
-                        className="text-left mt-4 p-2 text-red-600 hover:bg-red-100 rounded"
-                    >
-                        Выйти
-                    </button>
+        <div className="min-h-screen flex bg-gray-50">
+            {/* Sidebar */}
+            <aside className="w-64 bg-white border-r px-6 py-4 shadow-md">
+                <div className="text-2xl font-bold text-blue-600 mb-8">📚 OSU BPdisk</div>
+                <nav className="flex flex-col space-y-2">
+                    <button className="text-left px-3 py-2 rounded hover:bg-blue-100 text-gray-700">📄 Мои документы</button>
+                    <button className="text-left px-3 py-2 rounded hover:bg-blue-100 text-gray-700">✅ Одобренные</button>
+                    <button className="text-left px-3 py-2 rounded hover:bg-blue-100 text-gray-700">📦 Архив</button>
+                    <button onClick={handleLogout} className="text-left px-3 py-2 rounded text-red-600 hover:bg-red-100 mt-6">🚪 Выйти</button>
                 </nav>
             </aside>
 
-            <main className="flex-1 p-6">
-                <h1 className="text-2xl font-bold mb-4">
-                    Добро пожаловать, {user?.username || "пользователь"}
+            {/* Main Content */}
+            <main className="flex-1 p-8">
+                <h1 className="text-3xl font-semibold mb-6">
+                    👋 Добро пожаловать, <span className="text-blue-600">{user?.username}</span>
                 </h1>
 
-                <DocumentUpload onUploaded={fetchDocuments} />
+                <div className="mb-6">
+                    <DocumentUpload onUploaded={fetchDocuments} />
+                </div>
 
                 {loading ? (
-                    <p className="text-gray-500 mt-6">Загрузка документов...</p>
+                    <p className="text-gray-500">Загрузка документов...</p>
                 ) : (
                     <DocumentList documents={allDocuments} />
                 )}

@@ -12,16 +12,16 @@ function Profile() {
 
     return (
         <div className="p-8 max-w-xl mx-auto">
-            <h1 className="text-3xl font-bold mb-4">👤 Профиль пользователя</h1>
+            <h1 className="text-3xl font-bold mb-6 text-gray-800">👤 Профиль</h1>
 
             {!user ? (
                 <p className="text-gray-500">Загрузка...</p>
             ) : (
-                <div className="bg-white shadow-md rounded-lg p-6 space-y-4">
-                    <p><span className="font-semibold">Имя пользователя:</span> {user.username}</p>
-                    <p><span className="font-semibold">Email:</span> {user.email || "—"}</p>
-                    <p><span className="font-semibold">ID:</span> {user.id}</p>
-                    <p><span className="font-semibold">Дата регистрации:</span> {user.createdAt || "неизвестно"}</p>
+                <div className="bg-white shadow-md rounded-xl p-6 space-y-3">
+                    <div><span className="font-medium">Имя пользователя:</span> {user.username}</div>
+                    <div><span className="font-medium">Email:</span> {user.email || "—"}</div>
+                    <div><span className="font-medium">ID:</span> {user.id}</div>
+                    <div><span className="font-medium">Дата регистрации:</span> {user.createdAt || "неизвестно"}</div>
                 </div>
             )}
         </div>
