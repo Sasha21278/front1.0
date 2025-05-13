@@ -15,6 +15,11 @@ instance.interceptors.request.use((config) => {
     }
     return config;
 });
+export const downloadFile = async (id) => {
+    return instance.get(`/files/download/${id}`, {
+        responseType: "blob",
+    });
+};
 
 // логика на 401
 instance.interceptors.response.use(
