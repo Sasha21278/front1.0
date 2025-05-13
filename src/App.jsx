@@ -8,13 +8,15 @@ import Home from "./pages/Home";
 import Admin from "./pages/Admin";
 import DocumentUpload from "./components/DocumentUpload";
 import PrivateRoute from "./components/PrivateRoute";
-import Profile from "./pages/Profile"; // добавь, если ещё не подключил
+import Profile from "./pages/Profile";
 
 const App = () => {
+    const isLoggedIn = !!localStorage.getItem("token");
+
     return (
         <>
             <BrowserRouter>
-                <Navbar />
+                {isLoggedIn && <Navbar />}
                 <Routes>
                     <Route path="/" element={<Login />} />
                     <Route path="/register" element={<Register />} />

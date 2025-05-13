@@ -1,51 +1,36 @@
+import React from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import { logout } from "../services/auth";
-import { getProfile } from "../services/api";
+import { logout } from "../services/api";
 
-function Navbar() {
-    const [user, setUser] = useState(null);
+const Navbar = () => {
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
 
-    useEffect(() => {
-        getProfile()
-            .then((res) => setUser(res.data))
-            .catch(() => setUser(null));
-    }, []);
+    if (!token) return null; // ⛔️ Не показываем navbar, если нет токена
 
     const handleLogout = () => {
-        logout();
-        navigate("/login");
+        logout().finally(() => {
+            localStorage.removeItem("token");
+            navigate("/");
+        });
     };
 
     return (
-        <nav className="flex items-center justify-between p-4 bg-white shadow-md">
-            <Link to="/" className="flex items-center gap-2">
-                <img src="/logo.png" alt="OSU BPdisk" className="h-10" />
-                <span className="text-xl font-bold text-blue-700">OSU BPdisk</span>
-            </Link>
-
-            <div className="flex items-center gap-4">
-                {user && (
-                    <>
-                        <Link to="/home" className="text-blue-600 hover:underline">🏠 Домой</Link>
-
-                        <Link to="/profile" className="text-blue-600 hover:underline">👤 Профиль</Link>
-
-                        {user.role === "ADMIN" && (
-                            <Link to="/admin" className="text-purple-600 font-semibold hover:underline">
-                                🛠 Администрирование
-                            </Link>
-                        )}
-
-                        <button onClick={handleLogout} className="text-red-600 hover:underline">
-                            Выйти
-                        </button>
-                    </>
-                )}
+        <header className="bg-white shadow-md">
+            <div className="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+                <div className="flex items-center space-x-4">
+                    <img src="/logo.png" alt="Logo" className="h-8" />
+                    <span className="font-bold text-lg text-blue-800">OSU BPdisk</span>
+                </div>
+                <nav className="space-x-4">
+                    <Link to="/home" className="text-sm hover:underline">🏠 Домой</Link>
+                    <Link to="/profile" className="text-sm hover:underline">👤 Профиль</Link>
+                    <Link to="/admin" className="text-sm hover:underline">⚙️ Администрирование</Link>
+                    <button onClick={handleLogout} className="text-sm text-red-600 hover:underline">Выйти</button>
+                </nav>
             </div>
-        </nav>
+        </header>
     );
-}
+};
 
 export default Navbar;
