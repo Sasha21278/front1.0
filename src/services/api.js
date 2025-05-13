@@ -1,7 +1,9 @@
 import axios from "axios";
+import config from "tailwindcss/defaultConfig.js";
 
 const instance = axios.create({
-    baseURL: "http://195.113.104.72:8080/api",
+    baseURL: "http://localhost:8080/api",
+    // baseURL: "http://195.113.104.72:8080/api",
     withCredentials: true,
 });
 
@@ -25,16 +27,20 @@ instance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-
 // API методы
 export const login = (data) => instance.post("/auth/login", data);
 export const register = (data) => instance.post("/auth/register", data);
 export const logout = () => instance.post("/auth/logout");
 
-export const uploadDocument = (formData) =>
+export const uploadDocument = (formData, onProgress) =>
     instance.post("/files/upload", formData, {
         headers: { "Content-Type": "multipart/form-data" },
+        onUploadProgress: (progressEvent) => {
+            const percent = Math.round((progressEvent.loaded * 100) / progressEvent.total);
+            if (onProgress) onProgress(percent);
+        },
     });
+
 
 export const getDocuments = () => instance.get("/auth/my-documents");
 export const deleteDocument = (id) => instance.delete(`/document/${id}`);
@@ -54,3 +60,12 @@ export const getMetadata = (id) => instance.get(`/document/${id}/metadata`);
 export const getProfile = () => instance.get("/auth/profile");
 
 export default instance; // ✅ обязательно
+export const getAllUsers = () => instance.get("/admin/users");
+export const updateUserRole = (id, role) => instance.put(`/admin/users/${id}/role?role=${role}`);
+export const deleteUser = (id) => instance.delete(`/admin/users/${id}`);
+export const getAllDocuments = () => instance.get("/admin/documents");
+export const deleteDocumentAdmin = (id) => instance.delete(`/admin/docs/${id}`);
+export const getAdminStats = () => instance.get("/admin/stats");
+export const updateProfile = (id, data) => instance.put(`/users/${id}`, data);
+export const changePassword = (id, data) => instance.put(`/users/${id}/password`, data);
+export const getUserDocuments = (id) => instance.get(`/users/${id}/docs`);
