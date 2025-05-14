@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+
 import { getDocuments, logout } from "../services/api";
 import { getUserFromLocalStorage, clearUser } from "../services/auth";
 import DocumentUpload from "../components/DocumentUpload";
@@ -9,6 +11,7 @@ const Home = () => {
     const [allDocuments, setAllDocuments] = useState([]);
     const [loading, setLoading] = useState(true);
     const navigate = useNavigate();
+    const { t } = useTranslation();
     const user = getUserFromLocalStorage();
 
     useEffect(() => {
@@ -26,39 +29,32 @@ const Home = () => {
             const userDocs = docs.filter(doc => String(doc.user?.id) === String(user.id));
             setAllDocuments(userDocs);
         } catch (err) {
-            console.error("Ошибка при загрузке документов:", err);
+            console.error(t("error_loading_docs"), err);
             setAllDocuments([]);
         } finally {
             setLoading(false);
         }
     };
 
-    const handleLogout = async () => {
-        try {
-            await logout();
-        } finally {
-            clearUser();
-            navigate("/login");
-        }
-    };
-
     return (
-        <div className="min-h-screen flex bg-gray-50">
+        <div className="min-h-screen flex bg-gray-50 dark:bg-gray-900">
             {/* Sidebar */}
-            <aside className="w-64 bg-white border-r px-6 py-4 shadow-md">
-                <div className="text-2xl font-bold text-blue-600 mb-8">📚 OSU BPdisk</div>
+            <aside className="w-64 bg-white dark:bg-gray-800 border-r px-6 py-4 shadow-md">
+                <div className="text-2xl font-bold text-blue-600 dark:text-white mb-8">📚 OSU BPdisk</div>
                 <nav className="flex flex-col space-y-2">
-                    <button className="text-left px-3 py-2 rounded hover:bg-blue-100 text-gray-700">📄 Мои документы</button>
-                    <button className="text-left px-3 py-2 rounded hover:bg-blue-100 text-gray-700">✅ Одобренные</button>
-                    <button className="text-left px-3 py-2 rounded hover:bg-blue-100 text-gray-700">📦 Архив</button>
-                    <button onClick={handleLogout} className="text-left px-3 py-2 rounded text-red-600 hover:bg-red-100 mt-6">🚪 Выйти</button>
+                    <button
+                        onClick={() => navigate("/search")}
+                        className="text-left px-3 py-2 rounded hover:bg-blue-100 dark:hover:bg-gray-700 text-gray-700 dark:text-white"
+                    >
+                        🔍 {t("search")}
+                    </button>
                 </nav>
             </aside>
 
             {/* Main Content */}
-            <main className="flex-1 p-8">
+            <main className="flex-1 p-8 text-gray-900 dark:text-white">
                 <h1 className="text-3xl font-semibold mb-6">
-                    👋 Добро пожаловать, <span className="text-blue-600">{user?.username}</span>
+                👋 {t("welcome")}, <span className="text-blue-600 dark:text-blue-400">{user?.username}</span>
                 </h1>
 
                 <div className="mb-6">
@@ -66,7 +62,7 @@ const Home = () => {
                 </div>
 
                 {loading ? (
-                    <p className="text-gray-500">Загрузка документов...</p>
+                    <p className="text-gray-500 dark:text-gray-400">{t("loading_documents")}</p>
                 ) : (
                     <DocumentList documents={allDocuments} />
                 )}

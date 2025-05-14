@@ -1,5 +1,4 @@
 import axios from "axios";
-import config from "tailwindcss/defaultConfig.js";
 
 const instance = axios.create({
     baseURL: "http://localhost:8080/api",

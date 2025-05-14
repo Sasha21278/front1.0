@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { uploadDocument } from "../services/api";
 import toast from "react-hot-toast";
 
 const DocumentUpload = () => {
+    const { t } = useTranslation();
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState("");
     const [progress, setProgress] = useState(0);
@@ -10,7 +12,7 @@ const DocumentUpload = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         if (!file || !title) {
-            toast.error("Укажите файл и название");
+            toast.error(t("upload_error_required"));
             return;
         }
 
@@ -20,22 +22,22 @@ const DocumentUpload = () => {
 
         try {
             await uploadDocument(formData, setProgress);
-            toast.success("Файл успешно загружен");
+            toast.success(t("upload_success"));
             setFile(null);
             setTitle("");
             setProgress(0);
         } catch (error) {
-            toast.error("Ошибка при загрузке файла");
+            toast.error(t("upload_fail"));
             setProgress(0);
         }
     };
 
     return (
         <div className="p-6 max-w-2xl mx-auto">
-            <h1 className="text-2xl font-bold mb-4">Загрузить документ</h1>
+            <h1 className="text-2xl font-bold mb-4">{t("uploadDocumentTitle")}</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
-                    <label className="block font-medium">Название документа</label>
+                    <label className="block font-medium">{t("documentTitle")}</label>
                     <input
                         type="text"
                         value={title}
@@ -46,7 +48,7 @@ const DocumentUpload = () => {
                 </div>
 
                 <div>
-                    <label className="block font-medium">Выберите файл</label>
+                    <label className="block font-medium">{t("selectFile")}</label>
                     <input
                         type="file"
                         onChange={(e) => setFile(e.target.files[0])}
@@ -67,7 +69,7 @@ const DocumentUpload = () => {
                 )}
 
                 <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
-                    Загрузить
+                    {t("upload")}
                 </button>
             </form>
         </div>

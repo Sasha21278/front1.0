@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
     getAllUsers,
     updateUserRole,
@@ -9,6 +10,7 @@ import {
 } from "../services/api";
 
 const Admin = () => {
+    const { t } = useTranslation();
     const [users, setUsers] = useState([]);
     const [documents, setDocuments] = useState([]);
     const [stats, setStats] = useState(null);
@@ -24,7 +26,7 @@ const Admin = () => {
             setDocuments(docsRes.data);
             setStats(statsRes.data);
         } catch (error) {
-            console.error("Ошибка при загрузке данных:", error);
+            console.error(t("error_loading_data"), error);
         }
     };
 
@@ -37,19 +39,19 @@ const Admin = () => {
             await updateUserRole(id, role);
             fetchData();
         } catch (e) {
-            alert("Ошибка при изменении роли");
+            alert(t("error_changing_role"));
         }
     };
 
     const handleDeleteUser = async (id) => {
-        if (window.confirm("Удалить пользователя?")) {
+        if (window.confirm(t("confirm_delete_user"))) {
             await deleteUser(id);
             fetchData();
         }
     };
 
     const handleDeleteDoc = async (id) => {
-        if (window.confirm("Удалить документ?")) {
+        if (window.confirm(t("confirm_delete_document"))) {
             await deleteDocumentAdmin(id);
             fetchData();
         }
@@ -57,27 +59,24 @@ const Admin = () => {
 
     return (
         <div className="p-6 max-w-7xl mx-auto">
-            <h1 className="text-3xl font-bold mb-4">Административная панель</h1>
+            <h1 className="text-3xl font-bold mb-4">{t("adminPanel")}</h1>
 
             {stats && (
                 <div className="mb-6 grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div className="bg-blue-100 p-4 rounded-xl shadow">
-                        👤 <strong>Пользователей:</strong> {stats.users}
+                        👤 <strong>{t("users")}:</strong> {stats.users}
                     </div>
                     <div className="bg-green-100 p-4 rounded-xl shadow">
-                        📄 <strong>Документов:</strong> {stats.documents}
+                        📄 <strong>{t("documents")}:</strong> {stats.documents}
                     </div>
                 </div>
             )}
 
             <div className="mt-6">
-                <h2 className="text-xl font-semibold mb-2">Пользователи</h2>
+                <h2 className="text-xl font-semibold mb-2">{t("users")}</h2>
                 <div className="space-y-2">
                     {users.map((u) => (
-                        <div
-                            key={u.id}
-                            className="bg-white shadow p-4 rounded-lg flex justify-between items-center"
-                        >
+                        <div key={u.id} className="bg-white shadow p-4 rounded-lg flex justify-between items-center">
                             <div>
                                 <p className="font-medium">
                                     {u.username} ({u.email}) — <span className="italic">{u.role}</span>
@@ -85,23 +84,14 @@ const Admin = () => {
                                 <p className="text-sm text-gray-500">ID: {u.id}</p>
                             </div>
                             <div className="space-x-2">
-                                <button
-                                    onClick={() => handleRoleChange(u.id, "ADMIN")}
-                                    className="text-blue-600 hover:underline"
-                                >
-                                    Сделать админом
+                                <button onClick={() => handleRoleChange(u.id, "ADMIN")} className="text-blue-600 hover:underline">
+                                    {t("makeAdmin")}
                                 </button>
-                                <button
-                                    onClick={() => handleRoleChange(u.id, "USER")}
-                                    className="text-green-600 hover:underline"
-                                >
-                                    Сделать юзером
+                                <button onClick={() => handleRoleChange(u.id, "USER")} className="text-green-600 hover:underline">
+                                    {t("makeUser")}
                                 </button>
-                                <button
-                                    onClick={() => handleDeleteUser(u.id)}
-                                    className="text-red-600 hover:underline"
-                                >
-                                    Удалить
+                                <button onClick={() => handleDeleteUser(u.id)} className="text-red-600 hover:underline">
+                                    {t("delete")}
                                 </button>
                             </div>
                         </div>
@@ -110,27 +100,19 @@ const Admin = () => {
             </div>
 
             <div className="mt-10">
-                <h2 className="text-xl font-semibold mb-2">Документы</h2>
+                <h2 className="text-xl font-semibold mb-2">{t("documents")}</h2>
                 <div className="space-y-2">
                     {documents.map((doc) => (
-                        <div
-                            key={doc.id}
-                            className="bg-white shadow p-4 rounded-lg flex justify-between items-center"
-                        >
+                        <div key={doc.id} className="bg-white shadow p-4 rounded-lg flex justify-between items-center">
                             <div>
                                 <p className="font-medium">
-                                    {doc.title} (версия {doc.version})
+                                    {doc.title} ({t("version")}: {doc.version})
                                 </p>
                                 <p className="text-sm text-gray-500">ID: {doc.id}</p>
-                                <p className="text-sm text-gray-500">
-                                    Пользователь: {doc.user?.username || "неизвестен"}
-                                </p>
+                                <p className="text-sm text-gray-500">{t("author")}: {doc.user?.username || t("unknown")}</p>
                             </div>
-                            <button
-                                onClick={() => handleDeleteDoc(doc.id)}
-                                className="text-red-600 hover:underline"
-                            >
-                                Удалить
+                            <button onClick={() => handleDeleteDoc(doc.id)} className="text-red-600 hover:underline">
+                                {t("delete")}
                             </button>
                         </div>
                     ))}
