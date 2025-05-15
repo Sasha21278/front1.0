@@ -5,6 +5,14 @@ const instance = axios.create({
     // baseURL: "http://195.113.104.72:8080/api",
     withCredentials: true,
 });
+export const downloadFile = async (id) => {
+    return instance.get(`/files/download/${id}`, {
+        responseType: "blob",
+    });
+};
+export const searchDocuments = (params) =>
+    instance.get("/document/search", { params });
+
 
 // автоматически добавлять токен
 instance.interceptors.request.use((config) => {
@@ -14,11 +22,7 @@ instance.interceptors.request.use((config) => {
     }
     return config;
 });
-export const downloadFile = async (id) => {
-    return instance.get(`/files/download/${id}`, {
-        responseType: "blob",
-    });
-};
+
 
 // логика на 401
 instance.interceptors.response.use(

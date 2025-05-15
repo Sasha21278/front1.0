@@ -1,31 +1,37 @@
-import React, { useState } from "react";
+import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { uploadDocument } from "../services/api";
 import toast from "react-hot-toast";
 
 const DocumentUpload = () => {
     const { t } = useTranslation();
+    const fileInputRef = useRef();
+
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState("");
     const [progress, setProgress] = useState(0);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!file || !title) {
+
+        if (!file) {
             toast.error(t("upload_error_required"));
             return;
         }
 
         const formData = new FormData();
         formData.append("file", file);
-        formData.append("title", title);
+        formData.append("title", title.trim() || file.name);
 
         try {
             await uploadDocument(formData, setProgress);
             toast.success(t("upload_success"));
+
+            // Очистка
             setFile(null);
             setTitle("");
             setProgress(0);
+            if (fileInputRef.current) fileInputRef.current.value = "";
         } catch (error) {
             toast.error(t("upload_fail"));
             setProgress(0);
@@ -43,14 +49,16 @@ const DocumentUpload = () => {
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
                         className="border p-2 rounded w-full"
-                        required
+                        placeholder={t("optional")}
                     />
                 </div>
 
                 <div>
                     <label className="block font-medium">{t("selectFile")}</label>
                     <input
+                        ref={fileInputRef}
                         type="file"
+                        accept=".pdf,.docx"
                         onChange={(e) => setFile(e.target.files[0])}
                         className="border p-2 rounded w-full"
                         required
@@ -68,7 +76,10 @@ const DocumentUpload = () => {
                     </div>
                 )}
 
-                <button type="submit" className="bg-blue-600 text-white px-4 py-2 rounded">
+                <button
+                    type="submit"
+                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                >
                     {t("upload")}
                 </button>
             </form>

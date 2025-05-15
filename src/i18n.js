@@ -69,6 +69,12 @@ i18n
                     "upload_success": "File uploaded successfully",
                     "upload_fail": "File upload failed",
                     "search_button_click": "Search",
+                    "back": "Back",
+                    "title": "Title",
+                    "type": "Type",
+                    "year": "Year",
+                    "optional": "optional"
+
                 },
             },
             ru: {
@@ -129,6 +135,11 @@ i18n
                     "upload_success": "Файл успешно загружен",
                     "upload_fail": "Ошибка при загрузке файла",
                     "search_button_click": "Поиск",
+                    "back": "Назад",
+                    "title": "Название",
+                    "type": "Тип",
+                    "year": "Год",
+                    "optional": "необязательно"
                 },
             },
             cs: {
@@ -189,6 +200,11 @@ i18n
                     "upload_success": "Soubor byl úspěšně nahrán",
                     "upload_fail": "Chyba při nahrávání souboru",
                     "search_button_click": "Hledat",
+                    "back": "Zpět",
+                    "title": "Název",
+                    "type": "Typ",
+                    "year": "Rok",
+                    "optional": "nepovinné"
 
                 },
             },

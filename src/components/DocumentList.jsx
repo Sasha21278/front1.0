@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { downloadFile } from "../services/api";
+
 
 const DocumentList = ({ documents }) => {
     const { t } = useTranslation();
@@ -10,17 +12,9 @@ const DocumentList = ({ documents }) => {
 
     const handleDownload = async (id, filename = "document.pdf") => {
         try {
-            const token = localStorage.getItem("token");
-            const response = await fetch(`/api/files/download/${id}`, {
-                method: "GET",
-                headers: {
-                    Authorization: `Bearer ${token}`,
-                },
-            });
+            const response = await downloadFile(id);
 
-            if (!response.ok) throw new Error(t("download_error"));
-
-            const blob = await response.blob();
+            const blob = response.data;
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
@@ -30,10 +24,11 @@ const DocumentList = ({ documents }) => {
             link.remove();
             window.URL.revokeObjectURL(url);
         } catch (error) {
-            alert(t("download_error_retry"));
+            alert("Ошибка при скачивании. Возможно, файл не найден или вы не авторизованы.");
             console.error(error);
         }
     };
+
 
     const getReadableLabel = (key) => {
         switch (key) {
