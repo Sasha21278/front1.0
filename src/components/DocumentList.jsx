@@ -32,6 +32,7 @@ const DocumentList = ({ documents }) => {
 
     const getReadableLabel = (key) => {
         switch (key) {
+            case "wordCount":return t("wordCount")
             case "fileType": return t("fileType");
             case "pageCount": return t("pageCount");
             case "uploadDate": return t("uploadDate");

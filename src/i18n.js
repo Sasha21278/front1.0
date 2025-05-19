@@ -73,7 +73,8 @@ i18n
                     "title": "Title",
                     "type": "Type",
                     "year": "Year",
-                    "optional": "optional"
+                    "optional": "optional",
+                    "wordCount": "Word count"
 
                 },
             },
@@ -139,7 +140,8 @@ i18n
                     "title": "Название",
                     "type": "Тип",
                     "year": "Год",
-                    "optional": "необязательно"
+                    "optional": "необязательно",
+                    "wordCount": "Кол-во слов"
                 },
             },
             cs: {
@@ -204,8 +206,8 @@ i18n
                     "title": "Název",
                     "type": "Typ",
                     "year": "Rok",
-                    "optional": "nepovinné"
-
+                    "optional": "nepovinné",
+                    "wordCount": "Počet slov"
                 },
             },
         },
