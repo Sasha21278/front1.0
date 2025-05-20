@@ -74,7 +74,11 @@ i18n
                     "type": "Type",
                     "year": "Year",
                     "optional": "optional",
-                    "wordCount": "Word count"
+                    "wordCount": "Word count",
+                    "showKeywords": "Show Keywords",
+                    "summary": "Discription",
+                    "generateSummaryLabel": "🧪 Vygenerovat krátký popis (pomalé, beta funkce)"
+
 
                 },
             },
@@ -141,7 +145,11 @@ i18n
                     "type": "Тип",
                     "year": "Год",
                     "optional": "необязательно",
-                    "wordCount": "Кол-во слов"
+                    "wordCount": "Кол-во слов",
+                    "showKeywords": "Показать ключевые слова",
+                    "summary": "Описание",
+                    "generateSummaryLabel": "🧪 Сгенерировать краткое описание (медленно, бета-функция)"
+
                 },
             },
             cs: {
@@ -207,7 +215,11 @@ i18n
                     "type": "Typ",
                     "year": "Rok",
                     "optional": "nepovinné",
-                    "wordCount": "Počet slov"
+                    "wordCount": "Počet slov",
+                    "showKeywords": "Ukazát klíčové slova",
+                    "summary": "Popis",
+                    "generateSummaryLabel": "🧪 Generate a short summary (slow, beta feature)"
+
                 },
             },
         },

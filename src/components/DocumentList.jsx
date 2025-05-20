@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { downloadFile } from "../services/api";
 
-
 const DocumentList = ({ documents }) => {
     const { t } = useTranslation();
 
@@ -13,7 +12,6 @@ const DocumentList = ({ documents }) => {
     const handleDownload = async (id, filename = "document.pdf") => {
         try {
             const response = await downloadFile(id);
-
             const blob = response.data;
             const url = window.URL.createObjectURL(blob);
             const link = document.createElement("a");
@@ -24,21 +22,21 @@ const DocumentList = ({ documents }) => {
             link.remove();
             window.URL.revokeObjectURL(url);
         } catch (error) {
-            alert("Ошибка при скачивании. Возможно, файл не найден или вы не авторизованы.");
+            alert(t("download_error_retry"));
             console.error(error);
         }
     };
 
-
     const getReadableLabel = (key) => {
         switch (key) {
-            case "wordCount":return t("wordCount")
+            case "wordCount": return t("wordCount");
             case "fileType": return t("fileType");
             case "pageCount": return t("pageCount");
             case "uploadDate": return t("uploadDate");
             case "language": return t("language");
             case "extractedDOI": return t("doi");
             case "keyword": return t("keyword");
+            case "summary": return t("summary");
             default: return key;
         }
     };
@@ -47,6 +45,9 @@ const DocumentList = ({ documents }) => {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {documents.map((doc) => {
                 const [expanded, setExpanded] = useState(false);
+                const summary = doc.metadata?.find(m => m.metaKey === "summary");
+                const keywords = doc.metadata?.filter(m => m.metaKey === "keyword");
+                const otherMetadata = doc.metadata?.filter(m => m.metaKey !== "summary" && m.metaKey !== "keyword");
 
                 return (
                     <div
@@ -68,24 +69,49 @@ const DocumentList = ({ documents }) => {
                             </p>
                             <p className="text-xs text-gray-400 mb-1">ID: {doc.id}</p>
 
-                            <p className="text-sm font-semibold">{t("metadata")}:</p>
-                            <ul className="text-sm text-gray-600 list-disc list-inside">
-                                {(expanded ? doc.metadata : doc.metadata?.slice(0, 2))?.map((meta, i) => (
-                                    <li key={i}>
-                                        <span className="font-medium">
-                                            {getReadableLabel(meta.metaKey)}
-                                        </span>: {meta.value}
-                                    </li>
-                                ))}
-                            </ul>
+                            {/* 📝 Summary */}
+                            {summary && summary.value !== "Описание недоступно" && (
+                                <p className="text-sm italic text-gray-700 mb-2">
+                                    📝 {summary.value}
+                                </p>
+                            )}
 
-                            {doc.metadata?.length > 2 && (
-                                <button
-                                    className="mt-1 text-xs text-blue-600 hover:underline"
-                                    onClick={() => setExpanded((prev) => !prev)}
-                                >
-                                    {expanded ? t("collapse") : t("expand")}
-                                </button>
+                            {/* 📎 Keywords */}
+                            {keywords?.length > 0 && (
+                                <details className="mb-2 cursor-pointer text-sm text-blue-600">
+                                    <summary className="hover:underline">
+                                        {t("showKeywords") || "Показать ключевые слова"}
+                                    </summary>
+                                    <ul className="list-disc list-inside text-gray-700 mt-1">
+                                        {keywords.map((kw, i) => (
+                                            <li key={i}>{kw.value}</li>
+                                        ))}
+                                    </ul>
+                                </details>
+                            )}
+
+                            {/* 📋 Other Metadata */}
+                            {otherMetadata?.length > 0 && (
+                                <>
+                                    <p className="text-sm font-semibold">{t("metadata")}:</p>
+                                    <ul className="text-sm text-gray-600 list-disc list-inside">
+                                        {(expanded ? otherMetadata : otherMetadata.slice(0, 2)).map((meta, i) => (
+                                            <li key={i}>
+                                                <span className="font-medium">
+                                                    {getReadableLabel(meta.metaKey)}
+                                                </span>: {meta.value}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    {otherMetadata.length > 2 && (
+                                        <button
+                                            className="mt-1 text-xs text-blue-600 hover:underline"
+                                            onClick={() => setExpanded((prev) => !prev)}
+                                        >
+                                            {expanded ? t("collapse") : t("expand")}
+                                        </button>
+                                    )}
+                                </>
                             )}
                         </div>
 

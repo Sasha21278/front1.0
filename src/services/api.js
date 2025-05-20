@@ -74,6 +74,10 @@ export const deleteUser = (id) => instance.delete(`/admin/users/${id}`);
 export const getAllDocuments = () => instance.get("/admin/documents");
 export const deleteDocumentAdmin = (id) => instance.delete(`/admin/docs/${id}`);
 export const getAdminStats = () => instance.get("/admin/stats");
-export const updateProfile = (id, data) => instance.put(`/users/${id}`, data);
-export const changePassword = (id, data) => instance.put(`/users/${id}/password`, data);
 export const getUserDocuments = (id) => instance.get(`/users/${id}/docs`);
+export const updateProfile = (id, data) =>
+    instance.put(`/auth/users/${id}`, data);
+
+export const changePassword = (id, passwords) =>
+    instance.put(`/auth/users/${id}/change-password`, passwords);
+

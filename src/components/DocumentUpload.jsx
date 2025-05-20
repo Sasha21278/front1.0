@@ -9,6 +9,7 @@ const DocumentUpload = () => {
 
     const [file, setFile] = useState(null);
     const [title, setTitle] = useState("");
+    const [generateSummary, setGenerateSummary] = useState(false);
     const [progress, setProgress] = useState(0);
 
     const handleSubmit = async (e) => {
@@ -22,6 +23,7 @@ const DocumentUpload = () => {
         const formData = new FormData();
         formData.append("file", file);
         formData.append("title", title.trim() || file.name);
+        formData.append("generateSummary", generateSummary.toString());
 
         try {
             await uploadDocument(formData, setProgress);
@@ -30,6 +32,7 @@ const DocumentUpload = () => {
             // Очистка
             setFile(null);
             setTitle("");
+            setGenerateSummary(false);
             setProgress(0);
             if (fileInputRef.current) fileInputRef.current.value = "";
         } catch (error) {
@@ -63,6 +66,19 @@ const DocumentUpload = () => {
                         className="border p-2 rounded w-full"
                         required
                     />
+                </div>
+
+                <div className="flex items-start space-x-2">
+                    <input
+                        type="checkbox"
+                        id="generateSummary"
+                        checked={generateSummary}
+                        onChange={() => setGenerateSummary(!generateSummary)}
+                        className="mt-1"
+                    />
+                    <label htmlFor="generateSummary" className="text-sm">
+                        {t("generateSummaryLabel") || "🧪 Сгенерировать краткое описание (медленно, бета)"}
+                    </label>
                 </div>
 
                 {progress > 0 && (
