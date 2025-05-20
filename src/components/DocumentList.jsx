@@ -4,6 +4,7 @@ import { downloadFile } from "../services/api";
 
 const DocumentList = ({ documents }) => {
     const { t } = useTranslation();
+    const [expandedDocs, setExpandedDocs] = useState({});
 
     if (!documents || documents.length === 0) {
         return <p className="text-gray-500 mt-6 text-center">{t("noDocuments")}</p>;
@@ -36,18 +37,38 @@ const DocumentList = ({ documents }) => {
             case "language": return t("language");
             case "extractedDOI": return t("doi");
             case "keyword": return t("keyword");
+            case "supervisor": return t("supervisor");
             case "summary": return t("summary");
+            case "faculty": return t("facultyLabel");
             default: return key;
         }
+    };
+
+    const translateFaculty = (key) => {
+        const keys = [
+            "faculty_nature",
+            "faculty_philosophy",
+            "faculty_education",
+            "faculty_art",
+            "faculty_medicine",
+            "faculty_social"
+        ];
+        return keys.includes(key) ? t(key) : key;
+    };
+
+    const toggleExpand = (id) => {
+        setExpandedDocs(prev => ({ ...prev, [id]: !prev[id] }));
     };
 
     return (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {documents.map((doc) => {
-                const [expanded, setExpanded] = useState(false);
+                const expanded = expandedDocs[doc.id] || false;
                 const summary = doc.metadata?.find(m => m.metaKey === "summary");
                 const keywords = doc.metadata?.filter(m => m.metaKey === "keyword");
-                const otherMetadata = doc.metadata?.filter(m => m.metaKey !== "summary" && m.metaKey !== "keyword");
+                const otherMetadata = doc.metadata?.filter(
+                    m => !["summary", "keyword"].includes(m.metaKey)
+                );
 
                 return (
                     <div
@@ -80,7 +101,7 @@ const DocumentList = ({ documents }) => {
                             {keywords?.length > 0 && (
                                 <details className="mb-2 cursor-pointer text-sm text-blue-600">
                                     <summary className="hover:underline">
-                                        {t("showKeywords") || "Показать ключевые слова"}
+                                        {t("showKeywords")}
                                     </summary>
                                     <ul className="list-disc list-inside text-gray-700 mt-1">
                                         {keywords.map((kw, i) => (
@@ -95,18 +116,21 @@ const DocumentList = ({ documents }) => {
                                 <>
                                     <p className="text-sm font-semibold">{t("metadata")}:</p>
                                     <ul className="text-sm text-gray-600 list-disc list-inside">
-                                        {(expanded ? otherMetadata : otherMetadata.slice(0, 2)).map((meta, i) => (
+                                        {(expanded ? otherMetadata : otherMetadata.slice(0, 3)).map((meta, i) => (
                                             <li key={i}>
                                                 <span className="font-medium">
                                                     {getReadableLabel(meta.metaKey)}
-                                                </span>: {meta.value}
+                                                </span>:{" "}
+                                                {meta.metaKey === "faculty"
+                                                    ? translateFaculty(meta.value)
+                                                    : meta.value}
                                             </li>
                                         ))}
                                     </ul>
-                                    {otherMetadata.length > 2 && (
+                                    {otherMetadata.length > 3 && (
                                         <button
                                             className="mt-1 text-xs text-blue-600 hover:underline"
-                                            onClick={() => setExpanded((prev) => !prev)}
+                                            onClick={() => toggleExpand(doc.id)}
                                         >
                                             {expanded ? t("collapse") : t("expand")}
                                         </button>

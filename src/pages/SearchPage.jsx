@@ -4,6 +4,15 @@ import { useNavigate } from "react-router-dom";
 import { getAllDocuments, searchDocuments } from "../services/api";
 import DocumentList from "../components/DocumentList";
 
+const FACULTY_KEYS = [
+    "faculty_nature",
+    "faculty_philosophy",
+    "faculty_education",
+    "faculty_art",
+    "faculty_medicine",
+    "faculty_social"
+];
+
 const SearchPage = () => {
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -14,6 +23,8 @@ const SearchPage = () => {
     const [year, setYear] = useState("");
     const [keyword, setKeyword] = useState("");
     const [language, setLanguage] = useState("");
+    const [faculty, setFaculty] = useState("");
+    const [supervisor, setSupervisor] = useState("");
 
     const [results, setResults] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -41,7 +52,9 @@ const SearchPage = () => {
                 type: type || undefined,
                 year: year || undefined,
                 keyword: keyword || undefined,
-                language: language || undefined
+                language: language || undefined,
+                faculty: faculty || undefined,
+                supervisor: supervisor || undefined
             });
             setResults(res.data);
         } catch (err) {
@@ -77,6 +90,25 @@ const SearchPage = () => {
                     placeholder={t("author")}
                     className="border p-2 rounded"
                 />
+                <input
+                    type="text"
+                    value={supervisor}
+                    onChange={(e) => setSupervisor(e.target.value)}
+                    placeholder={t("supervisorLabel")}
+                    className="border p-2 rounded"
+                />
+                <select
+                    value={faculty}
+                    onChange={(e) => setFaculty(e.target.value)}
+                    className="border p-2 rounded"
+                >
+                    <option value="">{t("facultyLabel")}</option>
+                    {FACULTY_KEYS.map((key) => (
+                        <option key={key} value={key}>
+                            {t(key)}
+                        </option>
+                    ))}
+                </select>
                 <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}

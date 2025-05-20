@@ -77,8 +77,21 @@ i18n
                     "wordCount": "Word count",
                     "showKeywords": "Show Keywords",
                     "summary": "Discription",
-                    "generateSummaryLabel": "🧪 Vygenerovat krátký popis (pomalé, beta funkce)"
-
+                    "supervisorLabel": "Supervisor",
+                    "supervisorPlaceholder": "e.g., Ing. Pavel Smolka, Ph.D.",
+                    "supervisor": "Supervisor",
+                    "generateSummaryLabel": "🧪 Generate a short summary (slow, beta)",
+                    "facultyLabel": "Faculty",
+                    "selectFaculty": "Select faculty",
+                    "faculty_nature": "Faculty of Science",
+                    "faculty_philosophy": "Faculty of Arts",
+                    "faculty_education": "Faculty of Education",
+                    "faculty_art": "Faculty of Fine Arts",
+                    "faculty_medicine": "Faculty of Medicine",
+                    "faculty_social": "Faculty of Social Studies",
+                    "manualSummaryButton": "✍ Enter description manually",
+                    "hideSummaryButton": "Hide description",
+                    "manualSummaryPlaceholder": "Enter a short description (max 30 words)..."
 
                 },
             },
@@ -148,8 +161,21 @@ i18n
                     "wordCount": "Кол-во слов",
                     "showKeywords": "Показать ключевые слова",
                     "summary": "Описание",
-                    "generateSummaryLabel": "🧪 Сгенерировать краткое описание (медленно, бета-функция)"
-
+                    "supervisorLabel": "Ведущий работы",
+                    "supervisorPlaceholder": "Например, Ing. Pavel Smolka, Ph.D.",
+                    "supervisor": "Руководитель",
+                    "generateSummaryLabel": "🧪 Сгенерировать краткое описание (медленно, бета)",
+                    "facultyLabel": "Факультет",
+                    "selectFaculty": "Выберите факультет",
+                    "faculty_nature": "ПРИРОДОВЕДЧЕСКИЙ ФАКУЛЬТЕТ",
+                    "faculty_philosophy": "ФИЛОСОФСКИЙ ФАКУЛЬТЕТ",
+                    "faculty_education": "ПЕДАГОГИЧЕСКИЙ ФАКУЛЬТЕТ",
+                    "faculty_art": "ФАКУЛЬТЕТ ИСКУССТВ",
+                    "faculty_medicine": "МЕДИЦИНСКИЙ ФАКУЛЬТЕТ",
+                    "faculty_social": "ФАКУЛЬТЕТ СОЦИАЛЬНЫХ НАУК",
+                    "manualSummaryButton": "✍ Ввести описание вручную",
+                    "hideSummaryButton": "Скрыть описание",
+                    "manualSummaryPlaceholder": "Введите краткое описание (до 30 слов)..."
                 },
             },
             cs: {
@@ -218,7 +244,22 @@ i18n
                     "wordCount": "Počet slov",
                     "showKeywords": "Ukazát klíčové slova",
                     "summary": "Popis",
-                    "generateSummaryLabel": "🧪 Generate a short summary (slow, beta feature)"
+                    "supervisorLabel": "Vedoucí práce",
+                    "supervisorPlaceholder": "např. Ing. Pavel Smolka, Ph.D.",
+                    "supervisor": "Vedoucí",
+                    "generateSummaryLabel": "🧪 Vygenerovat krátké shrnutí (pomalé, beta)",
+                    "facultyLabel": "Fakulta",
+                    "selectFaculty": "Vyberte fakultu",
+                    "faculty_nature": "Přírodovědecká fakulta",
+                    "faculty_philosophy": "Filozofická fakulta",
+                    "faculty_education": "Pedagogická fakulta",
+                    "faculty_art": "Fakulta umění",
+                    "faculty_medicine": "Lékařská fakulta",
+                    "faculty_social": "Fakulta sociálních studií",
+                    "manualSummaryButton": "✍ Vložit popis ručně",
+                    "hideSummaryButton": "Skrýt popis",
+                    "manualSummaryPlaceholder": "Vložte krátký popis (max. 30 slov)...",
+
 
                 },
             },
