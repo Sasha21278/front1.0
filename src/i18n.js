@@ -259,8 +259,6 @@ i18n
                     "manualSummaryButton": "✍ Vložit popis ručně",
                     "hideSummaryButton": "Skrýt popis",
                     "manualSummaryPlaceholder": "Vložte krátký popis (max. 30 slov)...",
-
-
                 },
             },
         },
