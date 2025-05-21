@@ -62,7 +62,7 @@ const DocumentUpload = () => {
     };
 
     return (
-        <div className="p-6 max-w-2xl mx-auto">
+        <div className="p-6 max-w-2xl mx-auto text-gray-900 dark:text-white">
             <h1 className="text-2xl font-bold mb-4">{t("uploadDocumentTitle")}</h1>
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>
@@ -71,7 +71,7 @@ const DocumentUpload = () => {
                         type="text"
                         value={title}
                         onChange={(e) => setTitle(e.target.value)}
-                        className="border p-2 rounded w-full"
+                        className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
                         placeholder={t("optional")}
                     />
                 </div>
@@ -82,7 +82,7 @@ const DocumentUpload = () => {
                         type="text"
                         value={supervisor}
                         onChange={(e) => setSupervisor(e.target.value)}
-                        className="border p-2 rounded w-full"
+                        className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
                         placeholder={t("supervisorPlaceholder")}
                     />
                 </div>
@@ -92,15 +92,14 @@ const DocumentUpload = () => {
                     <select
                         value={faculty}
                         onChange={(e) => setFaculty(e.target.value)}
-                        className="border p-2 rounded w-full"
+                        className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
                         required
                     >
                         <option value="">{t("selectFaculty")}</option>
                         {FACULTIES_KEYS.map((key) => (
-                            <option key={key} value={key}>{t(key)}</option> // 👈 сохраняется КЛЮЧ, отображается перевод
+                            <option key={key} value={key}>{t(key)}</option>
                         ))}
                     </select>
-
                 </div>
 
                 <div>
@@ -110,7 +109,7 @@ const DocumentUpload = () => {
                         type="file"
                         accept=".pdf,.docx"
                         onChange={(e) => setFile(e.target.files[0])}
-                        className="border p-2 rounded w-full"
+                        className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
                         required
                     />
                 </div>
@@ -136,7 +135,7 @@ const DocumentUpload = () => {
                         <button
                             type="button"
                             onClick={() => setWriteSummaryManually(!writeSummaryManually)}
-                            className="text-blue-600 underline text-sm"
+                            className="text-blue-600 dark:text-blue-300 underline text-sm"
                         >
                             {writeSummaryManually ? t("hideSummaryButton") : t("manualSummaryButton")}
                         </button>
@@ -145,7 +144,7 @@ const DocumentUpload = () => {
                             <textarea
                                 value={summary}
                                 onChange={(e) => setSummary(e.target.value)}
-                                className="border p-2 rounded w-full"
+                                className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
                                 rows={3}
                                 placeholder={t("manualSummaryPlaceholder")}
                             />

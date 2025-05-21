@@ -33,7 +33,7 @@ const Settings = () => {
                 <label className="block mb-2 font-medium">{t("theme")}</label>
                 <button
                     onClick={handleThemeToggle}
-                    className="px-4 py-2 border rounded bg-gray-100 dark:bg-gray-700"
+                    className="px-4 py-2 border rounded bg-gray-100 dark:bg-gray-700 dark:text-white"
                 >
                     {theme === "dark" ? t("dark") : t("light")}
                 </button>
@@ -44,7 +44,7 @@ const Settings = () => {
                 <select
                     value={language}
                     onChange={handleLanguageChange}
-                    className="px-4 py-2 border rounded bg-gray-100 dark:bg-gray-700"
+                    className="px-4 py-2 border rounded bg-gray-100 dark:bg-gray-700 dark:text-white"
                 >
                     <option value="ru">Русский</option>
                     <option value="en">English</option>
@@ -52,6 +52,7 @@ const Settings = () => {
                 </select>
             </div>
         </div>
+
     );
 };
 

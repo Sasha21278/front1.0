@@ -65,10 +65,10 @@ const SearchPage = () => {
     };
 
     return (
-        <div className="p-8 max-w-6xl mx-auto">
+        <div className="p-8 max-w-6xl mx-auto text-gray-900 dark:text-white">
             <button
                 onClick={() => navigate(-1)}
-                className="mb-4 text-sm text-blue-600 hover:underline"
+                className="mb-4 text-sm text-blue-600 dark:text-blue-300 hover:underline"
             >
                 ← {t("back")}
             </button>
@@ -81,26 +81,26 @@ const SearchPage = () => {
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder={t("title")}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 />
                 <input
                     type="text"
                     value={author}
                     onChange={(e) => setAuthor(e.target.value)}
                     placeholder={t("author")}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 />
                 <input
                     type="text"
                     value={supervisor}
                     onChange={(e) => setSupervisor(e.target.value)}
                     placeholder={t("supervisorLabel")}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 />
                 <select
                     value={faculty}
                     onChange={(e) => setFaculty(e.target.value)}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 >
                     <option value="">{t("facultyLabel")}</option>
                     {FACULTY_KEYS.map((key) => (
@@ -112,7 +112,7 @@ const SearchPage = () => {
                 <select
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 >
                     <option value="">{t("type")}</option>
                     <option value="PDF">PDF</option>
@@ -121,7 +121,7 @@ const SearchPage = () => {
                 <select
                     value={year}
                     onChange={(e) => setYear(e.target.value)}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 >
                     <option value="">{t("year")}</option>
                     <option value="2023">2023</option>
@@ -133,12 +133,12 @@ const SearchPage = () => {
                     value={keyword}
                     onChange={(e) => setKeyword(e.target.value)}
                     placeholder={t("keyword")}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 />
                 <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
-                    className="border p-2 rounded"
+                    className="border p-2 rounded bg-gray-100 dark:bg-gray-800 dark:text-white"
                 >
                     <option value="">{t("language")}</option>
                     <option value="cs">cs</option>
