@@ -13,6 +13,13 @@ export const downloadFile = async (id) => {
 export const searchDocuments = (params) =>
     instance.get("/document/search", { params });
 
+export const uploadNewVersion = (formData) =>
+    instance.post("/files/upload-version", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+    });
+
+export const getVersions = (docId) =>
+    instance.get(`/document/${docId}/versions`);
 
 // автоматически добавлять токен
 instance.interceptors.request.use((config) => {

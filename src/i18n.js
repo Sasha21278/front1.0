@@ -91,7 +91,12 @@ i18n
                     "faculty_social": "Faculty of Social Studies",
                     "manualSummaryButton": "✍ Enter description manually",
                     "hideSummaryButton": "Hide description",
-                    "manualSummaryPlaceholder": "Enter a short description (max 30 words)..."
+                    "manualSummaryPlaceholder": "Enter a short description (max 30 words)...",
+                    "showVersions": "Show versions",
+                    "uploadNewVersion": "Upload new version",
+                    "version": "Version",
+                    "noOlderVersions": "No older versions",
+                    "noDescription": "No description available"
 
                 },
             },
@@ -175,7 +180,13 @@ i18n
                     "faculty_social": "ФАКУЛЬТЕТ СОЦИАЛЬНЫХ НАУК",
                     "manualSummaryButton": "✍ Ввести описание вручную",
                     "hideSummaryButton": "Скрыть описание",
-                    "manualSummaryPlaceholder": "Введите краткое описание (до 30 слов)..."
+                    "manualSummaryPlaceholder": "Введите краткое описание (до 30 слов)...",
+                    "showVersions": "Показать версии",
+                    "uploadNewVersion": "Добавить новую версию",
+                    "version": "Версия",
+                    "noOlderVersions": "Нет более старых версий",
+                    "noDescription": "Описание недоступно"
+
                 },
             },
             cs: {
@@ -259,6 +270,12 @@ i18n
                     "manualSummaryButton": "✍ Vložit popis ručně",
                     "hideSummaryButton": "Skrýt popis",
                     "manualSummaryPlaceholder": "Vložte krátký popis (max. 30 slov)...",
+                    "showVersions": "Zobrazit verze",
+                    "uploadNewVersion": "Nahrát novou verzi",
+                    "version": "Verze",
+                    "noOlderVersions": "Žádné starší verze",
+                    "noDescription": "Popis není dostupný"
+
                 },
             },
         },
