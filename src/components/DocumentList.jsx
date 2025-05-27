@@ -10,6 +10,10 @@ const DocumentList = ({ documents }) => {
         return <p className="text-gray-500 dark:text-gray-400 mt-6 text-center">{t("noDocuments")}</p>;
     }
 
+    // 🔽 Сортировка документов от новых к старым по uploadDate
+    const sortedDocs = [...documents].sort((a, b) => b.id - a.id);
+
+
     const handleDownload = async (id, filename = "document.pdf") => {
         try {
             const response = await downloadFile(id);
@@ -62,7 +66,7 @@ const DocumentList = ({ documents }) => {
 
     return (
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {documents.map((doc) => {
+            {sortedDocs.map((doc) => {
                 const expanded = expandedDocs[doc.id] || false;
                 const summary = doc.metadata?.find(m => m.metaKey === "summary");
                 const keywords = doc.metadata?.filter(m => m.metaKey === "keyword");

@@ -12,7 +12,7 @@ const FACULTIES_KEYS = [
     "faculty_social"
 ];
 
-const DocumentUpload = () => {
+const DocumentUpload = ({ onUploaded }) => {
     const { t } = useTranslation();
     const fileInputRef = useRef();
 
@@ -46,6 +46,7 @@ const DocumentUpload = () => {
             await uploadDocument(formData, setProgress);
             toast.success(t("upload_success"));
 
+            // Очистка формы
             setFile(null);
             setTitle("");
             setGenerateSummary(false);
@@ -55,6 +56,12 @@ const DocumentUpload = () => {
             setFaculty("");
             setProgress(0);
             if (fileInputRef.current) fileInputRef.current.value = "";
+
+            // 🔄 Автообновление документов
+            if (typeof onUploaded === "function") {
+                onUploaded();
+            }
+
         } catch (error) {
             toast.error(t("upload_fail"));
             setProgress(0);
