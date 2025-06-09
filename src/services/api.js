@@ -29,6 +29,22 @@ instance.interceptors.request.use((config) => {
     }
     return config;
 });
+export const getAttachments = (docId) =>
+    instance.get(`/document/${docId}/attachments`);
+
+export const uploadAttachment = (docId, file) => {
+    const formData = new FormData();
+    formData.append("file", file);
+    return instance.post(`/document/${docId}/attachments`, formData, {
+        headers: { "Content-Type": "multipart/form-data" }
+    });
+};
+
+export const downloadAttachment = (attachmentId) =>
+    instance.get(`/document/attachments/${attachmentId}/download`, { responseType: "blob" });
+
+export const deleteAttachment = (attachmentId) =>
+    instance.delete(`/document/attachments/${attachmentId}`);
 
 
 // логика на 401

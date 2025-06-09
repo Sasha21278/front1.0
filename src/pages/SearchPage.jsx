@@ -154,6 +154,14 @@ const SearchPage = () => {
                 {t("search")}
             </button>
 
+            {/* Количество найденных документов */}
+            {!loading && (
+                <div className="mb-4 font-medium text-gray-800 dark:text-gray-200">
+                    {t("resultsFound", { count: results.length })}
+                </div>
+            )}
+
+
             {loading ? (
                 <p>{t("loadingDocuments")}</p>
             ) : (

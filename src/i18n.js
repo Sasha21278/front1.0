@@ -94,9 +94,19 @@ i18n
                     "manualSummaryPlaceholder": "Enter a short description (max 30 words)...",
                     "showVersions": "Show versions",
                     "uploadNewVersion": "Upload new version",
-                    "version": "Version",
                     "noOlderVersions": "No older versions",
-                    "noDescription": "No description available"
+                    "noDescription": "No description available",
+                    "documentVersions": "Document Versions",
+                    "fileName": "File Name",
+                    "close": "Close",
+                    "loading": "Loading...",
+                    "noVersionsFound": "No versions found",
+                    "resultsFound": "Results found: {{count}}",
+                    "attachments": "Attachments",
+                    "no_attachments": "No attachments",
+                    "attachment_too_large": "Maximum attachment size is 100MB.",
+                    "delete_confirm": "Delete attachment?",
+
 
                 },
             },
@@ -183,9 +193,20 @@ i18n
                     "manualSummaryPlaceholder": "Введите краткое описание (до 30 слов)...",
                     "showVersions": "Показать версии",
                     "uploadNewVersion": "Добавить новую версию",
-                    "version": "Версия",
                     "noOlderVersions": "Нет более старых версий",
-                    "noDescription": "Описание недоступно"
+                    "noDescription": "Описание недоступно",
+                    "documentVersions": "Версии документа",
+                    "fileName": "Имя файла",
+                    "close": "Закрыть",
+                    "loading": "Загрузка...",
+                    "noVersionsFound": "Нет сохранённых версий",
+                    "resultsFound": "Найдено документов: {{count}}"
+                    ,"attachments": "Вложения",
+                    "no_attachments": "Нет вложений",
+                    "attachment_too_large": "Максимальный размер файла 100MB.",
+                    "delete_confirm": "Удалить вложение?",
+                    "choose_file": "Выбрать файл",
+                    "no_file_chosen": "Файл не выбран",
 
                 },
             },
@@ -274,7 +295,17 @@ i18n
                     "uploadNewVersion": "Nahrát novou verzi",
                     "version": "Verze",
                     "noOlderVersions": "Žádné starší verze",
-                    "noDescription": "Popis není dostupný"
+                    "noDescription": "Popis není dostupný",
+                    "documentVersions": "Verze dokumentu",
+                    "fileName": "Název souboru",
+                    "close": "Zavřít",
+                    "loading": "Načítání...",
+                    "noVersionsFound": "Žádné uložené verze",
+                    "resultsFound": "Nalezeno dokumentů: {{count}}"
+                    ,"attachments": "Přílohy",
+                    "no_attachments": "Žádné přílohy",
+                    "attachment_too_large": "Maximální velikost přílohy je 100MB.",
+                    "delete_confirm": "Odstranit přílohu?",
 
                 },
             },
