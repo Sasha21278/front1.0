@@ -2,6 +2,26 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { getVersions, downloadFile } from "../services/api";
 
+const getExtensionFromMetadata = (version) => {
+    const typeMeta = version.metadata?.find(m => m.metaKey.toLowerCase() === "filetype");
+    let ext = "pdf";
+    const typeValue = (typeMeta && typeMeta.value) || version.type;
+    if (typeValue) {
+        if (typeValue.toLowerCase().includes("docx")) ext = "docx";
+        else if (typeValue.toLowerCase().includes("doc")) ext = "doc";
+        else if (typeValue.toLowerCase().includes("pdf")) ext = "pdf";
+        else if (typeValue.toLowerCase().includes("pptx")) ext = "pptx";
+        else if (typeValue.toLowerCase().includes("odt")) ext = "odt";
+    }
+    return ext;
+};
+
+const getDownloadFileName = (version) => {
+    const ext = getExtensionFromMetadata(version);
+    const safeTitle = (version.title || "document").replace(/[^a-zA-Z0-9а-яА-ЯёЁ_\-\.]/g, "_");
+    return `${safeTitle}.${ext}`;
+};
+
 const Versions = ({ docId, onClose }) => {
     const { t } = useTranslation();
     const [versions, setVersions] = useState([]);
@@ -19,7 +39,8 @@ const Versions = ({ docId, onClose }) => {
     const handleDownload = async (id, filename) => {
         try {
             const res = await downloadFile(id);
-            const url = window.URL.createObjectURL(res.data);
+            const blob = res.data;
+            const url = window.URL.createObjectURL(blob);
             const link = document.createElement("a");
             link.href = url;
             link.setAttribute("download", filename);
@@ -54,12 +75,12 @@ const Versions = ({ docId, onClose }) => {
                                 <div>
                                     <span className="font-bold">{t("version")}: {v.version}</span>
                                     <br />
-                                    <span className="text-xs text-gray-500">{t("fileName")}: {v.title}</span>
+                                    <span className="text-xs text-gray-500">{t("fileName")}: {getDownloadFileName(v)}</span>
                                     <br />
                                     <span className="text-xs text-gray-400">ID: {v.id}</span>
                                 </div>
                                 <button
-                                    onClick={() => handleDownload(v.id)}
+                                    onClick={() => handleDownload(v.id, getDownloadFileName(v))}
                                     className="text-blue-600 hover:underline"
                                 >
                                     {t("download")}
