@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { downloadFile, getVersions } from "../services/api";
-import UploadNewVersionModal from "./UploadNewVersionModal";
-import Versions from "./Versions";
-import AttachmentsModal from "./AttachmentsModal";
+import { downloadFile, getVersions } from "../services/api.js";
+import UploadNewVersionModal from "./UploadNewVersionModal.jsx";
+import Versions from "./Versions.jsx";
+import AttachmentsModal from "./AttachmentsModal.jsx";
 
 const getExtensionFromMetadata = (doc) => {
     const typeMeta = doc.metadata?.find(m => m.metaKey.toLowerCase() === "filetype");

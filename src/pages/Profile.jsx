@@ -7,9 +7,9 @@ import {
     getDocuments,
     deleteDocument,
     downloadFile,
-} from "../services/api";
+} from "../services/api.js";
 import toast from "react-hot-toast";
-import { getUserFromLocalStorage } from "../services/auth";
+import { getUserFromLocalStorage } from "../services/auth.js";
 
 const Profile = () => {
     const { t } = useTranslation();
@@ -89,35 +89,36 @@ const Profile = () => {
         }
     };
 
-    if (!user) return <div className="p-6">{t("loading_profile")}</div>;
+    if (!user)
+        return <div className="p-6 text-gray-900 dark:text-white">{t("loading_profile")}</div>;
 
     return (
-        <div className="p-6 max-w-6xl mx-auto">
+        <div className="p-6 max-w-6xl mx-auto text-gray-900 dark:text-white">
             <h1 className="text-3xl font-bold mb-4">{t("userProfile")}</h1>
 
             {/* Профиль */}
             <div className="space-y-4 mb-10">
                 <div>
-                    <label className="block font-medium">{t("username")}</label>
+                    <label className="block font-medium text-gray-800 dark:text-gray-200">{t("username")}</label>
                     <input
                         type="text"
                         value={editData.username}
                         onChange={(e) => setEditData({ ...editData, username: e.target.value })}
-                        className="border p-2 w-full rounded"
+                        className="border p-2 w-full rounded bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     />
                 </div>
                 <div>
-                    <label className="block font-medium">Email</label>
+                    <label className="block font-medium text-gray-800 dark:text-gray-200">Email</label>
                     <input
                         type="email"
                         value={editData.email}
                         onChange={(e) => setEditData({ ...editData, email: e.target.value })}
-                        className="border p-2 w-full rounded"
+                        className="border p-2 w-full rounded bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     />
                 </div>
                 <button
                     onClick={handleProfileSave}
-                    className="bg-blue-600 text-white px-4 py-2 rounded"
+                    className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded transition"
                 >
                     {t("saveChanges")}
                 </button>
@@ -125,32 +126,32 @@ const Profile = () => {
 
             {/* Пароль */}
             <div className="space-y-4 mb-10">
-                <h2 className="text-xl font-semibold">{t("changePassword")}</h2>
+                <h2 className="text-xl font-semibold text-gray-900 dark:text-white">{t("changePassword")}</h2>
                 <div>
-                    <label className="block font-medium">{t("currentPassword")}</label>
+                    <label className="block font-medium text-gray-800 dark:text-gray-200">{t("currentPassword")}</label>
                     <input
                         type="password"
                         value={passwords.oldPassword}
                         onChange={(e) =>
                             setPasswords({ ...passwords, oldPassword: e.target.value })
                         }
-                        className="border p-2 w-full rounded"
+                        className="border p-2 w-full rounded bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     />
                 </div>
                 <div>
-                    <label className="block font-medium">{t("newPassword")}</label>
+                    <label className="block font-medium text-gray-800 dark:text-gray-200">{t("newPassword")}</label>
                     <input
                         type="password"
                         value={passwords.newPassword}
                         onChange={(e) =>
                             setPasswords({ ...passwords, newPassword: e.target.value })
                         }
-                        className="border p-2 w-full rounded"
+                        className="border p-2 w-full rounded bg-white dark:bg-gray-800 dark:text-white dark:border-gray-700"
                     />
                 </div>
                 <button
                     onClick={handleChangePassword}
-                    className="bg-green-600 text-white px-4 py-2 rounded"
+                    className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded transition"
                 >
                     {t("changePassword")}
                 </button>
@@ -158,35 +159,35 @@ const Profile = () => {
 
             {/* Документы */}
             <div className="mt-10">
-                <h2 className="text-xl font-semibold mb-2">{t("myDocuments")}</h2>
+                <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{t("myDocuments")}</h2>
                 <div className="space-y-2">
                     {docs.length === 0 ? (
-                        <p>{t("noDocuments")}</p>
+                        <p className="text-gray-700 dark:text-gray-300">{t("noDocuments")}</p>
                     ) : (
                         docs.map((doc) => (
                             <div
                                 key={doc.id}
-                                className="bg-white shadow p-4 rounded-lg flex justify-between items-center"
+                                className="bg-white dark:bg-gray-800 shadow p-4 rounded-lg flex justify-between items-center"
                             >
                                 <div>
-                                    <p className="font-medium">
+                                    <p className="font-medium text-gray-900 dark:text-white">
                                         {doc.title} ({t("version")}: {doc.version})
                                     </p>
-                                    <p className="text-sm text-gray-500">ID: {doc.id}</p>
-                                    <p className="text-sm text-gray-500">
+                                    <p className="text-sm text-gray-500 dark:text-gray-300">ID: {doc.id}</p>
+                                    <p className="text-sm text-gray-500 dark:text-gray-300">
                                         {t("author")}: {doc.user?.username || t("unknown")}
                                     </p>
                                 </div>
                                 <div className="space-x-3">
                                     <button
                                         onClick={() => handleDownload(doc.id, doc.title)}
-                                        className="text-blue-600 hover:underline text-sm"
+                                        className="text-blue-600 dark:text-blue-300 hover:underline text-sm"
                                     >
                                         {t("download")}
                                     </button>
                                     <button
                                         onClick={() => handleDeleteDoc(doc.id)}
-                                        className="text-red-600 hover:underline text-sm"
+                                        className="text-red-600 dark:text-red-400 hover:underline text-sm"
                                     >
                                         {t("delete")}
                                     </button>

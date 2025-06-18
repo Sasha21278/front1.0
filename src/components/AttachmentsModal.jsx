@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { getAttachments, uploadAttachment, downloadAttachment, deleteAttachment } from "../services/api";
+import { getAttachments, uploadAttachment, downloadAttachment, deleteAttachment } from "../services/api.js";
+
 
 const AttachmentsModal = ({ docId, onClose }) => {
     const { t } = useTranslation();
@@ -30,7 +31,7 @@ const AttachmentsModal = ({ docId, onClose }) => {
     const handleUpload = async () => {
         if (selectedFile) {
             if (selectedFile.size > 100 * 1024 * 1024) {
-                alert(t("attachment_too_large") || "Максимальный размер файла 100MB");
+                alert(t("attachment_too_large", "Maximum file size is 100MB"));
                 return;
             }
             await uploadAttachment(docId, selectedFile);
@@ -52,16 +53,21 @@ const AttachmentsModal = ({ docId, onClose }) => {
     };
 
     const handleDelete = async (id) => {
-        if (window.confirm(t("delete_confirm") || "Удалить вложение?")) {
+        if (window.confirm(t("delete_confirm", "Delete attachment?"))) {
             await deleteAttachment(id);
             fetchAttachments();
         }
     };
 
+
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="bg-white rounded-xl p-6 w-full max-w-lg shadow-xl relative">
-                <button onClick={onClose} className="absolute top-3 right-3 text-lg text-gray-400 hover:text-red-500">✕</button>
+            <div className="bg-white dark:bg-gray-800 dark:text-white rounded-xl p-6 w-full max-w-lg shadow-xl relative">
+                <button
+                    onClick={onClose}
+                    className="absolute top-3 right-3 text-lg text-gray-400 hover:text-red-500"
+                >✕</button>
+
                 <h2 className="text-xl font-semibold mb-4">{t("attachments")}</h2>
 
                 <div className="mb-4 flex items-center gap-3">
@@ -69,7 +75,7 @@ const AttachmentsModal = ({ docId, onClose }) => {
                         ref={fileInputRef}
                         type="file"
                         accept=".zip"
-                        style={{ display: "none" }}
+                        style={{display: "none"}}
                         onChange={handleFileChange}
                     />
                     <button
@@ -77,10 +83,10 @@ const AttachmentsModal = ({ docId, onClose }) => {
                         className="bg-blue-600 text-white px-3 py-2 rounded hover:bg-blue-700"
                         onClick={() => fileInputRef.current.click()}
                     >
-                        {t("choose_file") || "Выбрать файл"}
+                        {t("choose_file") || "Choose file"}
                     </button>
-                    <span className="text-sm text-gray-700">
-                        {selectedFile ? selectedFile.name : t("no_file_chosen") || "Файл не выбран"}
+                    <span className="text-sm text-gray-900 dark:text-gray-100">
+                        {selectedFile ? selectedFile.name : t("no_file_chosen") || "No file chosen"}
                     </span>
                     <button
                         type="button"
@@ -88,27 +94,37 @@ const AttachmentsModal = ({ docId, onClose }) => {
                         onClick={handleUpload}
                         disabled={!selectedFile}
                     >
-                        {t("upload") || "Загрузить"}
+                        {t("upload") || "Upload"}
                     </button>
+
+
                 </div>
 
                 {loading ? (
                     <div>{t("loading")}</div>
                 ) : (
-                    <ul className="divide-y">
-                        {attachments.length === 0 && <li className="text-gray-500">{t("no_attachments") || "Нет вложений"}</li>}
+                    <ul className="divide-y divide-gray-300 dark:divide-gray-600">
+                        {attachments.length === 0 && (
+                            <li className="text-gray-500 dark:text-gray-400">
+                                {t("no_attachments") || "No attachments"}
+                            </li>
+                        )}
                         {attachments.map(att => (
                             <li key={att.id} className="flex justify-between items-center py-2">
-                                <span className="truncate max-w-xs">{att.filename}</span>
+                                <span className="truncate max-w-xs text-gray-800 dark:text-gray-100">{att.filename}</span>
                                 <div className="flex gap-3">
                                     <button
                                         onClick={() => handleDownload(att.id, att.filename)}
                                         className="text-blue-600 hover:underline"
-                                    >{t("download")}</button>
+                                    >
+                                        {t("download") || "Download"}
+                                    </button>
                                     <button
                                         onClick={() => handleDelete(att.id)}
                                         className="text-red-600 hover:underline"
-                                    >{t("delete")}</button>
+                                    >
+                                        {t("delete") || "Delete"}
+                                    </button>
                                 </div>
                             </li>
                         ))}

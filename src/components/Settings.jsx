@@ -26,7 +26,9 @@ const Settings = () => {
     };
 
     return (
-        <div className="max-w-xl mx-auto p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded shadow">
+        <div
+            className="max-w-xl mx-auto mt-12 p-6 bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded shadow">
+
             <h2 className="text-2xl font-bold mb-6">{t("settings")}</h2>
 
             <div className="mb-4">

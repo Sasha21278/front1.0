@@ -1,4 +1,4 @@
-import api  from "./api";
+import api  from "./api.js";
 
 export const uploadDocument = async (file) => {
     const formData = new FormData();

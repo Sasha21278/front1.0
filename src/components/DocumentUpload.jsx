@@ -1,6 +1,6 @@
 import React, { useState, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { uploadDocument } from "../services/api";
+import { uploadDocument } from "../services/api.js";
 import toast from "react-hot-toast";
 
 const FACULTIES_KEYS = [
@@ -139,23 +139,25 @@ const DocumentUpload = ({ onUploaded }) => {
 
                 {!generateSummary && (
                     <>
-                        <button
-                            type="button"
-                            onClick={() => setWriteSummaryManually(!writeSummaryManually)}
-                            className="text-blue-600 dark:text-blue-300 underline text-sm"
-                        >
-                            {writeSummaryManually ? t("hideSummaryButton") : t("manualSummaryButton")}
-                        </button>
+                        <div className="flex flex-col space-y-4">
+                            <button
+                                type="button"
+                                onClick={() => setWriteSummaryManually(!writeSummaryManually)}
+                                className="text-blue-600 dark:text-blue-300 underline text-sm"
+                            >
+                                {writeSummaryManually ? t("hideSummaryButton") : t("manualSummaryButton")}
+                            </button>
 
-                        {writeSummaryManually && (
-                            <textarea
-                                value={summary}
-                                onChange={(e) => setSummary(e.target.value)}
-                                className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
-                                rows={3}
-                                placeholder={t("manualSummaryPlaceholder")}
-                            />
-                        )}
+                            {writeSummaryManually && (
+                                <textarea
+                                    value={summary}
+                                    onChange={(e) => setSummary(e.target.value)}
+                                    className="border p-2 rounded w-full bg-gray-100 dark:bg-gray-800 dark:text-white"
+                                    rows={3}
+                                    placeholder={t("manualSummaryPlaceholder")}
+                                />
+                            )}
+                        </div>
                     </>
                 )}
 
@@ -163,7 +165,7 @@ const DocumentUpload = ({ onUploaded }) => {
                     <div className="w-full bg-gray-200 rounded h-4">
                         <div
                             className="bg-blue-500 h-4 rounded text-xs text-white text-center"
-                            style={{ width: `${progress}%` }}
+                            style={{width: `${progress}%`}}
                         >
                             {progress}%
                         </div>

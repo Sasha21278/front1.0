@@ -7,7 +7,7 @@ import {
     getAllDocuments,
     deleteDocumentAdmin,
     getAdminStats,
-} from "../services/api";
+} from "../services/api.js";
 
 const Admin = () => {
     const { t } = useTranslation();

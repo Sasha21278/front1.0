@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getAllDocuments, searchDocuments } from "../services/api";
-import DocumentList from "../components/DocumentList";
+import { getAllDocuments, searchDocuments } from "../services/api.js";
+import DocumentList from "../components/DocumentList.jsx";
 
 const FACULTY_KEYS = [
     "faculty_nature",

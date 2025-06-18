@@ -106,8 +106,17 @@ i18n
                     "no_attachments": "No attachments",
                     "attachment_too_large": "Maximum attachment size is 100MB.",
                     "delete_confirm": "Delete attachment?",
-
-
+                    "choose_file": "Choose file",
+                    "no_file_chosen": "No file chosen",
+                    "profile_updated": "Profile updated successfully!",
+                    "profile_update_error": "Failed to update profile.",
+                    "password_changed": "Password changed successfully!",
+                    "password_change_error": "Failed to change password.",
+                    "load_documents_error": "Failed to load documents.",
+                    "delete_failed": "Failed to delete document.",
+                    "download_failed": "Failed to download document.",
+                    "registration_error_username_or_email": "Registration failed. The username or email is already taken."
+                    ,"registration_success_login": "Registration successful! Now you can log in."
                 },
             },
             ru: {
@@ -207,6 +216,15 @@ i18n
                     "delete_confirm": "Удалить вложение?",
                     "choose_file": "Выбрать файл",
                     "no_file_chosen": "Файл не выбран",
+                    "profile_updated": "Профиль успешно обновлен!",
+                    "profile_update_error": "Не удалось обновить профиль.",
+                    "password_changed": "Пароль успешно изменён!",
+                    "password_change_error": "Не удалось изменить пароль.",
+                    "load_documents_error": "Не удалось загрузить документы.",
+                    "delete_failed": "Не удалось удалить документ.",
+                    "download_failed": "Не удалось скачать документ.",
+                    "registration_error_username_or_email": "Ошибка регистрации. Такой логин или email уже занят."
+                    ,"registration_success_login": "Регистрация прошла успешно! Теперь вы можете войти."
 
                 },
             },
@@ -306,6 +324,17 @@ i18n
                     "no_attachments": "Žádné přílohy",
                     "attachment_too_large": "Maximální velikost přílohy je 100MB.",
                     "delete_confirm": "Odstranit přílohu?",
+                    "choose_file": "Vybrat soubor",
+                    "no_file_chosen": "Soubor nevybrán",
+                    "profile_updated": "Profil byl úspěšně aktualizován!",
+                    "profile_update_error": "Nepodařilo se aktualizovat profil.",
+                    "password_changed": "Heslo bylo úspěšně změněno!",
+                    "password_change_error": "Nepodařilo se změnit heslo.",
+                    "load_documents_error": "Nepodařilo se načíst dokumenty.",
+                    "delete_failed": "Nepodařilo se smazat dokument.",
+                    "download_failed": "Nepodařilo se stáhnout dokument.",
+                    "registration_error_username_or_email": "Registrace selhala. Uživatelské jméno nebo e-mail je již obsazeno."
+                    ,"registration_success_login": "Registrace byla úspěšná! Nyní se můžete přihlásit."
 
                 },
             },

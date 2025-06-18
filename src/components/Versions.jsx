@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { getVersions, downloadFile } from "../services/api";
+import { getVersions, downloadFile } from "../services/api.js";
 
 const getExtensionFromMetadata = (version) => {
     const typeMeta = version.metadata?.find(m => m.metaKey.toLowerCase() === "filetype");
@@ -54,8 +54,8 @@ const Versions = ({ docId, onClose }) => {
     };
 
     return (
-        <div className="fixed inset-0 z-40 flex items-center justify-center bg-black bg-opacity-40">
-            <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl relative">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-40">
+            <div className="bg-white dark:bg-gray-800 dark:text-white rounded-xl p-6 w-full max-w-md shadow-xl relative border border-gray-200 dark:border-gray-700">
                 <button
                     onClick={onClose}
                     className="absolute top-3 right-3 text-lg text-gray-400 hover:text-red-500"
@@ -65,23 +65,32 @@ const Versions = ({ docId, onClose }) => {
                 </button>
                 <h2 className="text-xl font-semibold mb-4">{t("documentVersions")}</h2>
                 {loading ? (
-                    <div>{t("loading")}</div>
+                    <div className="text-gray-500 dark:text-gray-400">{t("loading")}</div>
                 ) : versions.length === 0 ? (
-                    <div className="text-gray-500">{t("noVersionsFound")}</div>
+                    <div className="text-gray-500 dark:text-gray-400">{t("noVersionsFound")}</div>
                 ) : (
-                    <ul className="space-y-3">
+                    <ul className="divide-y divide-gray-300 dark:divide-gray-600">
                         {versions.map((v) => (
-                            <li key={v.id} className="flex justify-between items-center border-b pb-2">
+                            <li
+                                key={v.id}
+                                className="flex justify-between items-center py-2"
+                            >
                                 <div>
-                                    <span className="font-bold">{t("version")}: {v.version}</span>
+                                    <span className="font-bold text-gray-800 dark:text-gray-100">
+                                        {t("version")}: {v.version}
+                                    </span>
                                     <br />
-                                    <span className="text-xs text-gray-500">{t("fileName")}: {getDownloadFileName(v)}</span>
+                                    <span className="text-xs text-gray-500 dark:text-gray-300">
+                                        {t("fileName")}: {getDownloadFileName(v)}
+                                    </span>
                                     <br />
-                                    <span className="text-xs text-gray-400">ID: {v.id}</span>
+                                    <span className="text-xs text-gray-400 dark:text-gray-500">
+                                        ID: {v.id}
+                                    </span>
                                 </div>
                                 <button
                                     onClick={() => handleDownload(v.id, getDownloadFileName(v))}
-                                    className="text-blue-600 hover:underline"
+                                    className="px-3 py-1 bg-blue-600 hover:bg-blue-700 text-white rounded-lg shadow transition text-sm font-medium"
                                 >
                                     {t("download")}
                                 </button>

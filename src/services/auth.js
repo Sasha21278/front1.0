@@ -1,4 +1,4 @@
-import api from "./api"; // ← подключаем наш кастомный Axios instance
+import api from "./api.js"; // ← подключаем наш кастомный Axios instance
 
 export const login = async (username, password) => {
     const res = await api.post("/auth/login", { username, password });

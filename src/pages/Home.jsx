@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import { getDocuments, logout } from "../services/api";
-import { getUserFromLocalStorage, clearUser } from "../services/auth";
-import DocumentUpload from "../components/DocumentUpload";
-import DocumentList from "../components/DocumentList";
+import { getDocuments, logout } from "../services/api.js";
+import { getUserFromLocalStorage, clearUser } from "../services/auth.js";
+import DocumentUpload from "../components/DocumentUpload.jsx";
+import DocumentList from "../components/DocumentList.jsx";
 
 const Home = () => {
     const [allDocuments, setAllDocuments] = useState([]);

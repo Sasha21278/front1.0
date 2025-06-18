@@ -21,7 +21,6 @@ export const uploadNewVersion = (formData) =>
 export const getVersions = (docId) =>
     instance.get(`/document/${docId}/versions`);
 
-// автоматически добавлять токен
 instance.interceptors.request.use((config) => {
     const token = localStorage.getItem("token");
     if (token) {
