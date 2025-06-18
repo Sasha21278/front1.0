@@ -85,6 +85,7 @@ export const extractMetadata = (file, title) => {
     formData.append("title", title);
     return instance.post("/test/extract-metadata", formData);
 };
+export const getAllDocumentsForUser = () => instance.get("/document");
 
 export const getMetadata = (id) => instance.get(`/document/${id}/metadata`);
 export const getProfile = () => instance.get("/auth/profile");

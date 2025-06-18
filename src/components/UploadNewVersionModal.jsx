@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { uploadNewVersion } from "../services/api.js";
+import toast from "react-hot-toast";
 
 const UploadNewVersionModal = ({ isOpen, onClose, documentId, onUploaded }) => {
     const { t } = useTranslation();
@@ -18,7 +19,9 @@ const UploadNewVersionModal = ({ isOpen, onClose, documentId, onUploaded }) => {
             await uploadNewVersion(formData);
             onUploaded();
             onClose();
+            toast.success(t("version_uploaded_success"));
         } catch (err) {
+            toast.error(t("upload_fail"));
             alert(t("upload_fail"));
             console.error(err);
         }

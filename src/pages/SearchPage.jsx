@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { getAllDocuments, searchDocuments } from "../services/api.js";
+import { getAllDocumentsForUser, searchDocuments } from "../services/api.js";
 import DocumentList from "../components/DocumentList.jsx";
 
 const FACULTY_KEYS = [
@@ -32,7 +32,7 @@ const SearchPage = () => {
     useEffect(() => {
         const fetchAll = async () => {
             try {
-                const res = await getAllDocuments();
+                const res = await getAllDocumentsForUser();
                 setResults(res.data);
             } catch (err) {
                 console.error("Ошибка загрузки документов:", err);

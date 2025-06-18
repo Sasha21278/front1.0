@@ -116,7 +116,9 @@ i18n
                     "delete_failed": "Failed to delete document.",
                     "download_failed": "Failed to download document.",
                     "registration_error_username_or_email": "Registration failed. The username or email is already taken."
-                    ,"registration_success_login": "Registration successful! Now you can log in."
+                    ,"registration_success_login": "Registration successful! Now you can log in.",
+                    "version_uploaded_success": "New version uploaded successfully!",
+
                 },
             },
             ru: {
@@ -225,6 +227,7 @@ i18n
                     "download_failed": "Не удалось скачать документ.",
                     "registration_error_username_or_email": "Ошибка регистрации. Такой логин или email уже занят."
                     ,"registration_success_login": "Регистрация прошла успешно! Теперь вы можете войти."
+                    ,"version_uploaded_success": "Новая версия успешно загружена!"
 
                 },
             },
@@ -335,6 +338,7 @@ i18n
                     "download_failed": "Nepodařilo se stáhnout dokument.",
                     "registration_error_username_or_email": "Registrace selhala. Uživatelské jméno nebo e-mail je již obsazeno."
                     ,"registration_success_login": "Registrace byla úspěšná! Nyní se můžete přihlásit."
+                    ,"version_uploaded_success": "Nová verze byla úspěšně nahrána!"
 
                 },
             },
