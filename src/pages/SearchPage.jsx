@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { getAllDocumentsForUser, searchDocuments } from "../services/api.js";
-import DocumentList from "../components/DocumentList.jsx";
+import DocumentSearchList from "../components/DocumentSearchList.jsx";
 
 const FACULTY_KEYS = [
     "faculty_nature",
@@ -165,7 +165,7 @@ const SearchPage = () => {
             {loading ? (
                 <p>{t("loadingDocuments")}</p>
             ) : (
-                <DocumentList documents={results} />
+                <DocumentSearchList documents={results} />
             )}
         </div>
     );
