@@ -7,14 +7,12 @@ import Register from "./pages/Register.jsx";
 import Home from "./pages/Home.jsx";
 import Admin from "./pages/Admin.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
-import DocumentUpload from "./components/DocumentUpload.jsx";
 import PrivateRoute from "./components/PrivateRoute.jsx";
 import Profile from "./pages/Profile.jsx";
 import Settings from "./components/Settings.jsx";
 import "./i18n.js";
 
 const App = () => {
-    // ⚡️ Основное состояние
     const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem("token"));
 
     useEffect(() => {
