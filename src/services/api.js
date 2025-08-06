@@ -46,7 +46,6 @@ export const deleteAttachment = (attachmentId) =>
     instance.delete(`/document/attachments/${attachmentId}`);
 
 
-// логика на 401
 instance.interceptors.response.use(
     (response) => response,
     (error) => {
@@ -57,7 +56,6 @@ instance.interceptors.response.use(
         return Promise.reject(error);
     }
 );
-// API методы
 export const login = (data) => instance.post("/auth/login", data);
 export const register = (data) => instance.post("/auth/register", data);
 export const logout = () => instance.post("/auth/logout");

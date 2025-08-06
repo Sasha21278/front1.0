@@ -58,7 +58,7 @@ const SearchPage = () => {
             });
             setResults(res.data);
         } catch (err) {
-            console.error("Ошибка поиска:", err);
+            console.error("Error not found:", err);
         } finally {
             setLoading(false);
         }
@@ -154,7 +154,6 @@ const SearchPage = () => {
                 {t("search")}
             </button>
 
-            {/* Количество найденных документов */}
             {!loading && (
                 <div className="mb-4 font-medium text-gray-800 dark:text-gray-200">
                     {t("resultsFound", { count: results.length })}

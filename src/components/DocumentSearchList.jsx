@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { downloadFile, getVersions } from "../services/api.js";
+import { downloadFile} from "../services/api.js";
 import UploadNewVersionModal from "./UploadNewVersionModal.jsx";
 import Versions from "./Versions.jsx";
 import AttachmentsModalReadOnly from "./AttachmentsModalReadOnly.jsx";
@@ -21,14 +21,15 @@ const getExtensionFromMetadata = (doc) => {
 
 const getDownloadFileName = (doc) => {
     const ext = getExtensionFromMetadata(doc);
-    const safeTitle = (doc.title || "document").replace(/[^a-zA-Z0-9а-яА-ЯёЁ_\-\.]/g, "_");
+    const safeTitle = (doc.title || "document").replace(/[^a-zA-Z0-9а-яА-ЯёЁ_\-.]/g, "_");
     return `${safeTitle}.${ext}`;
 };
+
 
 const DocumentSearchList = ({ documents }) => {
     const { t } = useTranslation();
     const [expandedDocs, setExpandedDocs] = useState({});
-    const [versionsByDocId, setVersionsByDocId] = useState({});
+    const [versionsByDocId] = useState({});
     const [showVersionsFor, setShowVersionsFor] = useState(null);
     const [showAttachmentsFor, setShowAttachmentsFor] = useState(null);
 
@@ -49,19 +50,37 @@ const DocumentSearchList = ({ documents }) => {
             console.error(error);
         }
     };
-
+    const translateFaculty = (key) => {
+        const keys = [
+            "faculty_nature",
+            "faculty_philosophy",
+            "faculty_education",
+            "faculty_art",
+            "faculty_medicine",
+            "faculty_social"
+        ];
+        return keys.includes(key) ? t(key) : key;
+    };
+    const getReadableLabel = (key) => {
+        switch (key) {
+            case "wordCount": return t("wordCount");
+            case "fileType": return t("fileType");
+            case "pageCount": return t("pageCount");
+            case "uploadDate": return t("uploadDate");
+            case "language": return t("language");
+            case "extractedDOI": return t("doi");
+            case "keyword": return t("keyword");
+            case "supervisor": return t("supervisor");
+            case "summary": return t("summary");
+            case "faculty": return t("facultyLabel");
+            default: return key;
+        }
+    };
     const toggleExpand = (id) => {
         setExpandedDocs(prev => ({ ...prev, [id]: !prev[id] }));
     };
 
-    const fetchVersions = async (docId) => {
-        try {
-            const res = await getVersions(docId);
-            setVersionsByDocId(prev => ({ ...prev, [docId]: res.data }));
-        } catch (err) {
-            console.error(err);
-        }
-    };
+
 
     if (!documents || documents.length === 0) {
         return <p className="text-gray-500 dark:text-gray-400 mt-6 text-center">{t("noDocuments")}</p>;
@@ -114,7 +133,6 @@ const DocumentSearchList = ({ documents }) => {
                                     >
                                         {t("attachments")}
                                     </button>
-                                    {/* Кнопку "добавить новую версию" здесь не выводим! */}
                                 </div>
 
                                 {versionsByDocId[doc.id]?.length > 1 ? (
@@ -154,12 +172,19 @@ const DocumentSearchList = ({ documents }) => {
                                         <ul className="text-sm list-disc list-inside">
                                             {(expanded ? otherMetadata : otherMetadata.slice(0, 3)).map((meta, i) => (
                                                 <li key={i}>
-                                                    <span className="font-medium">{meta.metaKey}</span>: {meta.value}
+                                                    <span
+                                                        className="font-medium">{getReadableLabel(meta.metaKey)}</span>:
+                                                    {meta.metaKey === "faculty"
+                                                        ? translateFaculty(meta.value)
+                                                        : meta.value}
                                                 </li>
+
                                             ))}
                                         </ul>
+
                                         {otherMetadata.length > 3 && (
-                                            <button onClick={() => toggleExpand(doc.id)} className="mt-1 text-xs text-blue-600 dark:text-blue-300 hover:underline">
+                                            <button onClick={() => toggleExpand(doc.id)}
+                                                    className="mt-1 text-xs text-blue-600 dark:text-blue-300 hover:underline">
                                                 {expanded ? t("collapse") : t("expand")}
                                             </button>
                                         )}

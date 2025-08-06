@@ -21,7 +21,7 @@ const getExtensionFromMetadata = (doc) => {
 
 const getDownloadFileName = (doc) => {
     const ext = getExtensionFromMetadata(doc);
-    const safeTitle = (doc.title || "document").replace(/[^a-zA-Z0-9а-яА-ЯёЁ_\-\.]/g, "_");
+    const safeTitle = (doc.title || "document").replace(/[^a-zA-Z0-9а-яА-ЯёЁ_\-.]/g, "_");
     return `${safeTitle}.${ext}`;
 };
 

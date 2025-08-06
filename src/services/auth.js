@@ -1,8 +1,8 @@
-import api from "./api.js"; // ← подключаем наш кастомный Axios instance
+import api from "./api.js";
 
 export const login = async (username, password) => {
     const res = await api.post("/auth/login", { username, password });
-    localStorage.setItem("token", res.data.accessToken); // сохраняем токен
+    localStorage.setItem("token", res.data.accessToken);
     return res.data;
 };
 

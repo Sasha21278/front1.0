@@ -12,13 +12,11 @@ const Navbar = ({ setIsLoggedIn }) => {
     const [isDark, setIsDark] = useState(false);
     const [user, setUser] = useState(null);
 
-    // Показывать Navbar только если не на /login или /register
     const hideNavbarRoutes = ["/", "/login", "/register"];
     if (hideNavbarRoutes.includes(location.pathname)) return null;
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        // Тема
         const observer = new MutationObserver(() => {
             setIsDark(document.documentElement.classList.contains("dark"));
         });
@@ -32,7 +30,6 @@ const Navbar = ({ setIsLoggedIn }) => {
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
     useEffect(() => {
-        // Читаем пользователя из localStorage (где ты сохраняешь {accessToken, username, role, ...})
         try {
             const userData = JSON.parse(localStorage.getItem("user"));
             setUser(userData || null);

@@ -157,7 +157,6 @@ const Profile = () => {
                 </button>
             </div>
 
-            {/* Документы */}
             <div className="mt-10">
                 <h2 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">{t("myDocuments")}</h2>
                 <div className="space-y-2">

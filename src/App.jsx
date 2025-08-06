@@ -20,7 +20,6 @@ const App = () => {
         document.documentElement.classList.toggle("dark", savedTheme === "dark");
     }, []);
 
-    // Хак: слушаем storage чтобы даже в других вкладках сразу обновлялось
     useEffect(() => {
         const onStorage = () => setIsLoggedIn(!!localStorage.getItem("token"));
         window.addEventListener("storage", onStorage);

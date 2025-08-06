@@ -8,7 +8,7 @@ i18n
     .init({
         fallbackLng: "ru",
         interpolation: {
-            escapeValue: false, // react handles this
+            escapeValue: false,
         },
         resources: {
             en: {
